@@ -32,15 +32,30 @@ class OutputDescriptorsTests: XCTestCase {
         }
 
     }
-    
 
     func testLength() {
         testInvalidDescriptor("", OutputDescriptor.ParseError.tooShort)
     }
     
+    func testInvalidCharacters() {
+        testInvalidDescriptor("💩", OutputDescriptor.ParseError.invalidCharacter)
+    }
+    
     func testSetDescriptorString() {
         // BIP32 test vector 1 at m/0'/1
         testValidDescriptor("wpkh(03501e454bf00751f24b1b489aa925215d66af2234e3891c3b21a52bedb3cd711c)")
+    }
+    
+    func testChecksum(_ expectedChecksum: String, _ descriptor: String) {
+        let checksum = try! OutputDescriptor(descriptor).checksum
+        XCTAssertEqual(checksum, expectedChecksum)
+    }
+    
+    func testChecksums() {
+        testChecksum("e0lhcajv", "wpkh(03501e454bf00751f24b1b489aa925215d66af2234e3891c3b21a52bedb3cd711c)")
+        testChecksum("p956d68g", "wpkh(KyFAjQ5rgrKvhXvNMtFB5PCSKUYD1yyPEe3xr3T34TZSUHycXtMM)")
+        testChecksum("8asu2299", "wpkh([3442193e/0'/1]03501e454bf00751f24b1b489aa925215d66af2234e3891c3b21a52bedb3cd711c)")
+        testChecksum("2gtje8py", "wpkh([3442193e/0h/1]03501e454bf00751f24b1b489aa925215d66af2234e3891c3b21a52bedb3cd711c)")
     }
 
     func testPerformanceExample() {
