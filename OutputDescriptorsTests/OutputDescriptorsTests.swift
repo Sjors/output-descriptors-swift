@@ -19,10 +19,28 @@ class OutputDescriptorsTests: XCTestCase {
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
+    
+    func testValidDescriptor(_ descriptor: String) {
+        XCTAssertNoThrow(try OutputDescriptor(descriptor))
+        let desc = try! OutputDescriptor(descriptor)
+        XCTAssertEqual(desc.descriptor, descriptor)
+    }
+    
+    func testInvalidDescriptor(_ descriptor: String, _ expectedError: Error) {
+        XCTAssertThrowsError(try OutputDescriptor(descriptor)) {error in
+            XCTAssertEqual(String(describing: error), String(describing: expectedError))
+        }
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    }
+    
+
+    func testLength() {
+        testInvalidDescriptor("", OutputDescriptor.ParseError.tooShort)
+    }
+    
+    func testSetDescriptorString() {
+        // BIP32 test vector 1 at m/0'/1
+        testValidDescriptor("wpkh(03501e454bf00751f24b1b489aa925215d66af2234e3891c3b21a52bedb3cd711c)")
     }
 
     func testPerformanceExample() {

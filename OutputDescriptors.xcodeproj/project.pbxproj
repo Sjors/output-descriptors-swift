@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A21EF9A923A3BA09001B65E3 /* OutputDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21EF9A823A3BA09001B65E3 /* OutputDescriptor.swift */; };
 		A26CDE4D23A3AABB00551CBB /* OutputDescriptors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A26CDE4323A3AABB00551CBB /* OutputDescriptors.framework */; };
 		A26CDE5223A3AABB00551CBB /* OutputDescriptorsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26CDE5123A3AABB00551CBB /* OutputDescriptorsTests.swift */; };
 		A26CDE5423A3AABB00551CBB /* OutputDescriptors.h in Headers */ = {isa = PBXBuildFile; fileRef = A26CDE4623A3AABB00551CBB /* OutputDescriptors.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -24,6 +25,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A21EF9A823A3BA09001B65E3 /* OutputDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputDescriptor.swift; sourceTree = "<group>"; };
 		A26CDE4323A3AABB00551CBB /* OutputDescriptors.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OutputDescriptors.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A26CDE4623A3AABB00551CBB /* OutputDescriptors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OutputDescriptors.h; sourceTree = "<group>"; };
 		A26CDE4723A3AABB00551CBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -74,8 +76,9 @@
 		A26CDE4523A3AABB00551CBB /* OutputDescriptors */ = {
 			isa = PBXGroup;
 			children = (
-				A26CDE4623A3AABB00551CBB /* OutputDescriptors.h */,
 				A26CDE4723A3AABB00551CBB /* Info.plist */,
+				A26CDE4623A3AABB00551CBB /* OutputDescriptors.h */,
+				A21EF9A823A3BA09001B65E3 /* OutputDescriptor.swift */,
 			);
 			path = OutputDescriptors;
 			sourceTree = "<group>";
@@ -151,6 +154,7 @@
 				TargetAttributes = {
 					A26CDE4223A3AABB00551CBB = {
 						CreatedOnToolsVersion = 11.3;
+						LastSwiftMigration = 1130;
 					};
 					A26CDE4B23A3AABB00551CBB = {
 						CreatedOnToolsVersion = 11.3;
@@ -199,6 +203,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A21EF9A923A3BA09001B65E3 /* OutputDescriptor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,6 +349,7 @@
 		A26CDE5823A3AABB00551CBB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 227MFQPYQ4;
@@ -361,6 +367,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = nl.sprovoost.OutputDescriptors;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -369,6 +376,7 @@
 		A26CDE5923A3AABB00551CBB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 227MFQPYQ4;
@@ -394,6 +402,7 @@
 		A26CDE5B23A3AABB00551CBB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 227MFQPYQ4;
 				INFOPLIST_FILE = OutputDescriptorsTests/Info.plist;
@@ -412,6 +421,7 @@
 		A26CDE5C23A3AABB00551CBB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 227MFQPYQ4;
 				INFOPLIST_FILE = OutputDescriptorsTests/Info.plist;
