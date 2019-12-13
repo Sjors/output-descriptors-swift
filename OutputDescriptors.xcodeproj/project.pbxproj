@@ -26,6 +26,7 @@
 
 /* Begin PBXFileReference section */
 		A21EF9A823A3BA09001B65E3 /* OutputDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputDescriptor.swift; sourceTree = "<group>"; };
+		A23FF5B123A3DC7A00475AF6 /* Descriptor.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Descriptor.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		A26CDE4323A3AABB00551CBB /* OutputDescriptors.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OutputDescriptors.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A26CDE4623A3AABB00551CBB /* OutputDescriptors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OutputDescriptors.h; sourceTree = "<group>"; };
 		A26CDE4723A3AABB00551CBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -58,6 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				A2C2976623A3AE7F0084009E /* README.md */,
+				A23FF5B123A3DC7A00475AF6 /* Descriptor.playground */,
 				A26CDE4523A3AABB00551CBB /* OutputDescriptors */,
 				A26CDE5023A3AABB00551CBB /* OutputDescriptorsTests */,
 				A26CDE4423A3AABB00551CBB /* Products */,
