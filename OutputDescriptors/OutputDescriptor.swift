@@ -35,15 +35,13 @@ public struct OutputDescriptor {
         let maybeChecksum = descriptor.suffix(9)
         if maybeChecksum.prefix(1) == "#" {
             self.descriptor = String(descriptor.dropLast(9))
-            print(self.descriptor)
-            print(self.checksum)
-            print(maybeChecksum.dropFirst())
-            guard maybeChecksum.dropFirst() == self.checksum else {
-                throw ParseError.invalidChecksum
-            }
         } else {
             self.descriptor = descriptor
         }
+        guard maybeChecksum.prefix(1) != "#" || maybeChecksum.dropFirst() == self.checksum else {
+            throw ParseError.invalidChecksum
+        }
+
     }
 
     // Internal function that computes the descriptor checksum
