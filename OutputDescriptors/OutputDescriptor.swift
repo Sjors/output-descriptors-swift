@@ -21,7 +21,21 @@ public struct OutputDescriptor {
         case invalidChecksum
     }
     
+    public enum OutputType {
+        case legacy
+        case wrappedSegwit
+        case segWit
+    }
+    
+    public enum DescriptorType {
+        case unknown
+        case pubkeyHash
+    }
+    
     let descriptor: String
+    
+    let descType: DescriptorType;
+    let outputType: OutputType;
     
     public init (_ descriptor: String) throws {
         guard descriptor.count != 0 else {
@@ -33,10 +47,23 @@ public struct OutputDescriptor {
             }
         }
         let maybeChecksum = descriptor.suffix(9)
-        if maybeChecksum.prefix(1) == "#" {
-            self.descriptor = String(descriptor.dropLast(9))
+        let desc = maybeChecksum.prefix(1) == "#" ? String(descriptor.dropLast(9)) : descriptor
+        self.descriptor = desc
+        if descriptor.hasPrefix("sh(wsh(") && desc.hasSuffix("))") {
+            self.outputType = .wrappedSegwit
+            self.descType = .unknown
+        } else if descriptor.hasPrefix("sh(wpkh(") && desc.hasSuffix("))") {
+            self.outputType = .wrappedSegwit
+            self.descType = .pubkeyHash
+        } else if descriptor.hasPrefix("wsh(") && desc.hasSuffix(")") {
+            self.outputType = .segWit
+            self.descType = .unknown
+        } else if descriptor.hasPrefix("wpkh(") && desc.hasSuffix(")") {
+            self.outputType = .segWit
+            self.descType = .pubkeyHash
         } else {
-            self.descriptor = descriptor
+            self.outputType = .legacy
+            self.descType = .unknown
         }
         guard maybeChecksum.prefix(1) != "#" || maybeChecksum.dropFirst() == self.checksum else {
             throw ParseError.invalidChecksum
@@ -93,5 +120,5 @@ public struct OutputDescriptor {
         
         return result
     }
-
+    
 }
