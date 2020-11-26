@@ -23,7 +23,11 @@ class OutputDescriptorsTests: XCTestCase {
     func testValidDescriptor(_ descriptor: String) {
         XCTAssertNoThrow(try OutputDescriptor(descriptor))
         let desc = try! OutputDescriptor(descriptor)
-        XCTAssertEqual(desc.descriptor, descriptor)
+        if descriptor.suffix(9).prefix(1) == "#" {
+            XCTAssertEqual(desc.descriptor, String(descriptor.dropLast(9)))
+        } else {
+            XCTAssertEqual(desc.descriptor, descriptor)
+        }
     }
     
     func testInvalidDescriptor(_ descriptor: String, _ expectedError: Error) {
@@ -56,6 +60,13 @@ class OutputDescriptorsTests: XCTestCase {
         testChecksum("p956d68g", "wpkh(KyFAjQ5rgrKvhXvNMtFB5PCSKUYD1yyPEe3xr3T34TZSUHycXtMM)")
         testChecksum("8asu2299", "wpkh([3442193e/0'/1]03501e454bf00751f24b1b489aa925215d66af2234e3891c3b21a52bedb3cd711c)")
         testChecksum("2gtje8py", "wpkh([3442193e/0h/1]03501e454bf00751f24b1b489aa925215d66af2234e3891c3b21a52bedb3cd711c)")
+    }
+    
+    func testChecksumIncluded() {
+        testInvalidDescriptor("wpkh(03501e454bf00751f24b1b489aa925215d66af2234e3891c3b21a52bedb3cd711c)#e0lhcaj0", OutputDescriptor.ParseError.invalidChecksum)
+        
+        testValidDescriptor("wpkh(03501e454bf00751f24b1b489aa925215d66af2234e3891c3b21a52bedb3cd711c)#e0lhcajv")
+
     }
 
     func testPerformanceExample() {

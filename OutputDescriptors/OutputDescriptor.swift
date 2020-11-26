@@ -18,6 +18,7 @@ public struct OutputDescriptor {
     enum ParseError: Error {
         case tooShort
         case invalidCharacter
+        case invalidChecksum
     }
     
     let descriptor: String
@@ -31,7 +32,18 @@ public struct OutputDescriptor {
                 throw ParseError.invalidCharacter
             }
         }
-        self.descriptor = descriptor
+        let maybeChecksum = descriptor.suffix(9)
+        if maybeChecksum.prefix(1) == "#" {
+            self.descriptor = String(descriptor.dropLast(9))
+            print(self.descriptor)
+            print(self.checksum)
+            print(maybeChecksum.dropFirst())
+            guard maybeChecksum.dropFirst() == self.checksum else {
+                throw ParseError.invalidChecksum
+            }
+        } else {
+            self.descriptor = descriptor
+        }
     }
 
     // Internal function that computes the descriptor checksum
