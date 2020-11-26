@@ -30,6 +30,7 @@ public struct OutputDescriptor {
     public enum DescriptorType {
         case unknown
         case pubkeyHash
+        case sortedMulti
     }
     
     let descriptor: String
@@ -49,26 +50,33 @@ public struct OutputDescriptor {
         let maybeChecksum = descriptor.suffix(9)
         let desc = maybeChecksum.prefix(1) == "#" ? String(descriptor.dropLast(9)) : descriptor
         self.descriptor = desc
-        if descriptor.hasPrefix("sh(wsh(") && desc.hasSuffix("))") {
+        var innerDesc: String?
+        var descType: DescriptorType = .unknown
+        if desc.hasPrefix("sh(wsh(") && desc.hasSuffix("))") {
             self.outputType = .wrappedSegwit
-            self.descType = .unknown
-        } else if descriptor.hasPrefix("sh(wpkh(") && desc.hasSuffix("))") {
+            innerDesc = String(desc.dropFirst(7).dropLast(1))
+        } else if desc.hasPrefix("sh(wpkh(") && desc.hasSuffix("))") {
             self.outputType = .wrappedSegwit
-            self.descType = .pubkeyHash
-        } else if descriptor.hasPrefix("wsh(") && desc.hasSuffix(")") {
+            descType = .pubkeyHash
+        } else if desc.hasPrefix("wsh(") && desc.hasSuffix(")") {
             self.outputType = .segWit
-            self.descType = .unknown
-        } else if descriptor.hasPrefix("wpkh(") && desc.hasSuffix(")") {
+            innerDesc = String(desc.dropFirst(4).dropLast(1))
+        } else if desc.hasPrefix("wpkh(") && desc.hasSuffix(")") {
             self.outputType = .segWit
-            self.descType = .pubkeyHash
+            descType = .pubkeyHash
         } else {
             self.outputType = .legacy
-            self.descType = .unknown
         }
+        if let inner = innerDesc {
+            print(inner)
+            if inner.hasPrefix("sortedmulti(") && inner.hasSuffix(")") {
+                descType = .sortedMulti
+            }
+        }
+        self.descType = descType
         guard maybeChecksum.prefix(1) != "#" || maybeChecksum.dropFirst() == self.checksum else {
             throw ParseError.invalidChecksum
         }
-
     }
 
     // Internal function that computes the descriptor checksum
