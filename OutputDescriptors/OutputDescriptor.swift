@@ -19,6 +19,7 @@ public struct OutputDescriptor {
         case tooShort
         case invalidCharacter
         case invalidChecksum
+        case invalidParam
     }
     
     public enum OutputType {
@@ -27,17 +28,17 @@ public struct OutputDescriptor {
         case segWit
     }
     
-    public enum DescriptorType {
+    public enum DescriptorType : Equatable {
         case unknown
         case pubkeyHash
-        case sortedMulti
+        case sortedMulti(threshold: Int)
     }
     
     let descriptor: String
     
     let descType: DescriptorType;
     let outputType: OutputType;
-    
+        
     public init (_ descriptor: String) throws {
         guard descriptor.count != 0 else {
             throw ParseError.tooShort
@@ -68,9 +69,20 @@ public struct OutputDescriptor {
             self.outputType = .legacy
         }
         if let inner = innerDesc {
-            print(inner)
             if inner.hasPrefix("sortedmulti(") && inner.hasSuffix(")") {
-                descType = .sortedMulti
+                let args = inner.dropFirst(12).dropLast(1)
+                let thresholdS = args.prefix { (char) -> Bool in
+                    char.isNumber
+                }
+                guard thresholdS.count != 0 else {
+                    throw ParseError.invalidParam
+                }
+                let threshold = Int(thresholdS)!
+                descType = .sortedMulti(threshold: threshold)
+                guard args.components(separatedBy: ",").count - 1 >= threshold  else {
+                    throw ParseError.invalidParam
+                }
+
             }
         }
         self.descType = descType
