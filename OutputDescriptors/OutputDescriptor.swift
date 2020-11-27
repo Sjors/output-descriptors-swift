@@ -36,8 +36,10 @@ public struct OutputDescriptor {
     
     let descriptor: String
     
-    let descType: DescriptorType;
-    let outputType: OutputType;
+    public let descType: DescriptorType
+    public let outputType: OutputType
+    
+    public let extendedKeys: [ExtendedKey]
         
     public init (_ descriptor: String) throws {
         guard descriptor.count != 0 else {
@@ -53,6 +55,7 @@ public struct OutputDescriptor {
         self.descriptor = desc
         var innerDesc: String?
         var descType: DescriptorType = .unknown
+        var extendedKeys: [ExtendedKey] = []
         if desc.hasPrefix("sh(wsh(") && desc.hasSuffix("))") {
             self.outputType = .wrappedSegwit
             innerDesc = String(desc.dropFirst(7).dropLast(1))
@@ -82,10 +85,19 @@ public struct OutputDescriptor {
                 guard args.components(separatedBy: ",").count - 1 >= threshold  else {
                     throw ParseError.invalidParam
                 }
+                try args.components(separatedBy: ",").dropFirst().forEach { (key) in
+                    if let extKey = try? ExtendedKey(key) {
+                        extendedKeys.append(extKey)
+                    } else {
+                        throw ParseError.invalidParam
+                    }
+                }
 
             }
         }
+        
         self.descType = descType
+        self.extendedKeys = extendedKeys
         guard maybeChecksum.prefix(1) != "#" || maybeChecksum.dropFirst() == self.checksum else {
             throw ParseError.invalidChecksum
         }

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		A21EF9A923A3BA09001B65E3 /* OutputDescriptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21EF9A823A3BA09001B65E3 /* OutputDescriptor.swift */; };
+		A26698E62570F48E00D4C9A7 /* ExtendedKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26698E52570F48E00D4C9A7 /* ExtendedKey.swift */; };
+		A26698EA2570F91100D4C9A7 /* ExtentedKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26698E92570F91100D4C9A7 /* ExtentedKeyTests.swift */; };
 		A26CDE4D23A3AABB00551CBB /* OutputDescriptors.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A26CDE4323A3AABB00551CBB /* OutputDescriptors.framework */; };
 		A26CDE5223A3AABB00551CBB /* OutputDescriptorsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26CDE5123A3AABB00551CBB /* OutputDescriptorsTests.swift */; };
 		A26CDE5423A3AABB00551CBB /* OutputDescriptors.h in Headers */ = {isa = PBXBuildFile; fileRef = A26CDE4623A3AABB00551CBB /* OutputDescriptors.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -27,6 +29,8 @@
 /* Begin PBXFileReference section */
 		A21EF9A823A3BA09001B65E3 /* OutputDescriptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputDescriptor.swift; sourceTree = "<group>"; };
 		A23FF5B123A3DC7A00475AF6 /* Descriptor.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = Descriptor.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		A26698E52570F48E00D4C9A7 /* ExtendedKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedKey.swift; sourceTree = "<group>"; };
+		A26698E92570F91100D4C9A7 /* ExtentedKeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtentedKeyTests.swift; sourceTree = "<group>"; };
 		A26CDE4323A3AABB00551CBB /* OutputDescriptors.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OutputDescriptors.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A26CDE4623A3AABB00551CBB /* OutputDescriptors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OutputDescriptors.h; sourceTree = "<group>"; };
 		A26CDE4723A3AABB00551CBB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -81,6 +85,7 @@
 				A26CDE4723A3AABB00551CBB /* Info.plist */,
 				A26CDE4623A3AABB00551CBB /* OutputDescriptors.h */,
 				A21EF9A823A3BA09001B65E3 /* OutputDescriptor.swift */,
+				A26698E52570F48E00D4C9A7 /* ExtendedKey.swift */,
 			);
 			path = OutputDescriptors;
 			sourceTree = "<group>";
@@ -89,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				A26CDE5123A3AABB00551CBB /* OutputDescriptorsTests.swift */,
+				A26698E92570F91100D4C9A7 /* ExtentedKeyTests.swift */,
 				A26CDE5323A3AABB00551CBB /* Info.plist */,
 			);
 			path = OutputDescriptorsTests;
@@ -205,6 +211,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A26698E62570F48E00D4C9A7 /* ExtendedKey.swift in Sources */,
 				A21EF9A923A3BA09001B65E3 /* OutputDescriptor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -214,6 +221,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A26CDE5223A3AABB00551CBB /* OutputDescriptorsTests.swift in Sources */,
+				A26698EA2570F91100D4C9A7 /* ExtentedKeyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -77,6 +77,11 @@ class OutputDescriptorsTests: XCTestCase {
         testValidDescriptor("sh(wsh(sortedmulti(2,[3442193e/48h/0h/0h/2h]xpub6E64WfdQwBGz85XhbZryr9gUGUPBgoSu5WV6tJWpzAvgAmpVpdPHkT3XYm9R5J6MeWzvLQoz4q845taC9Q28XutbptxAmg7q8QPkjvTL4oi/0/*,[bd16bee5/48h/0h/0h/2h]xpub6DwQ4gBCmJZM3TaKogP41tpjuEwnMH2nWEi3PFev37LfsWPvjZrh1GfAG8xvoDYMPWGKG1oBPMCfKpkVbJtUHRaqRdCb6X6o1e9PQTVK88a/0/*)))", .wrappedSegwit, .sortedMulti(threshold: 2))
         testInvalidDescriptor("sh(wsh(sortedmulti(abc,))", OutputDescriptor.ParseError.invalidParam)
         testInvalidDescriptor("sh(wsh(sortedmulti(3,only_one))", OutputDescriptor.ParseError.invalidParam)
+        
+        let desc = try! OutputDescriptor(descriptor)
+        XCTAssertEqual(desc.extendedKeys.count, 2)
+        XCTAssertEqual(desc.extendedKeys[0].fingerprint, "3442193e")
+        XCTAssertEqual(desc.extendedKeys[1].fingerprint, "bd16bee5")
     }
 
     func testPerformanceExample() {
