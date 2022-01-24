@@ -10,6 +10,12 @@ This implementation is very limited; it currently only supports:
 * calculating and verifying the checksum for a descriptor string
 * parsing a limited set of descriptor types
 
+## Deprecation
+
+I no longer intend to expand or maintain this, now that LibWally is adding
+support for descriptor parsing. Instead this functionally will be added to
+[LibWally-Swift](https://github.com/Sjors/libwally-swift/pull/57).
+
 ## Install
 
 Via CocoaPods:
